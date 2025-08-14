@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - OWODE Digital Services LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .square-font {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur">
+        <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <div class="flex items-center space-x-3">
+                <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-16 w-auto">
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Home</a>
+                <a href="savings.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Savings</a>
+                <a href="loans.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Loans</a>
+                <a href="how-it-work.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">How It Works</a>
+                <a href="become-agent.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Become an Agent</a>
+                <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Contact</a>
+            </nav>
+
+            <a href="open-account.html" class="hidden md:flex bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                Open Account
+            </a>
+        </div>
+    </header>
+
+    <!-- Content same as privacy.html -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.
+            </p>
+            <p class="text-sm text-gray-500 mt-4">Last updated: January 2024</p>
+        </div>
+    </section>
+
+    <!-- Same content as privacy.html file -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto prose prose-lg">
+                <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 space-y-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">1. Information We Collect</h2>
+                        <p class="text-gray-700 leading-relaxed mb-4">
+                            We collect information you provide directly to us, such as when you create an account, make transactions, or contact us for support.
+                        </p>
+                    </div>
+                    <!-- Rest of content same as privacy.html -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer same as other pages -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-12 w-auto">
+                    <p class="text-gray-400">Your trusted partner for savings, loans, and financial growth in Nigeria.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const TARGET_WORD = "OWODE";
+        function wrapTextNodes(node) {
+            if (node.nodeType === 3) {
+                const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+                const parent = node.parentNode;
+                const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
+                if (replacedHTML !== node.nodeValue) {
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = replacedHTML;
+                    parent.replaceChild(wrapper, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+                [...node.childNodes].forEach(wrapTextNodes);
+            }
+        }
+        wrapTextNodes(document.body);
+    </script>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cards - OWODE Digital Services LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-gradient-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .card-gradient-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .square-font {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass-effect border-b border-white border-opacity-20">
+        <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <div class="flex items-center space-x-4">
+                <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-16 w-auto">
+                <div>
+                    <h1 class="text-xl font-bold text-gray-900">My Cards</h1>
+                    <p class="text-sm text-gray-600">Manage your debit and virtual cards</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="showRequestCardModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    + Request Card
+                </button>
+                <button onclick="window.location.href='dashboard.html'" class="text-gray-600 hover:text-gray-900 transition-colors">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-6xl mx-auto">
+            <!-- Cards Overview -->
+            <div class="grid md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900 mb-1">3</div>
+                    <div class="text-sm text-gray-600">Active Cards</div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900 mb-1">₦45,230</div>
+                    <div class="text-sm text-gray-600">This Month Spent</div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <svg class="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900 mb-1">127</div>
+                    <div class="text-sm text-gray-600">Transactions</div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <svg class="h-6 w-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-bold text-gray-900 mb-1">₦500,000</div>
+                    <div class="text-sm text-gray-600">Daily Limit</div>
+                </div>
+            </div>
+
+            <!-- My Cards -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 slide-in">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">My Cards</h3>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Physical Debit Card -->
+                    <div class="relative">
+                        <div class="card-gradient rounded-2xl p-6 text-white shadow-xl transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <div class="text-sm opacity-75">OWODE BANK</div>
+                                    <div class="text-xs opacity-60">Debit Card</div>
+                                </div>
+                                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="text-lg font-mono tracking-wider">**** **** **** 4567</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <div class="text-xs opacity-60">CARD HOLDER</div>
+                                    <div class="text-sm font-semibold">JOHN DOE</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs opacity-60">EXPIRES</div>
+                                    <div class="text-sm font-semibold">12/26</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex space-x-2">
+                            <button onclick="manageCard('physical')" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Manage
+                            </button>
+                            <button onclick="freezeCard('physical')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Freeze
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Virtual Card 1 -->
+                    <div class="relative">
+                        <div class="card-gradient-2 rounded-2xl p-6 text-white shadow-xl transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <div class="text-sm opacity-75">OWODE VIRTUAL</div>
+                                    <div class="text-xs opacity-60">Online Shopping</div>
+                                </div>
+                                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="text-lg font-mono tracking-wider">**** **** **** 8901</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <div class="text-xs opacity-60">LIMIT</div>
+                                    <div class="text-sm font-semibold">₦100,000</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs opacity-60">EXPIRES</div>
+                                    <div class="text-sm font-semibold">06/25</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex space-x-2">
+                            <button onclick="manageCard('virtual1')" class="flex-1 bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Manage
+                            </button>
+                            <button onclick="deleteCard('virtual1')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Virtual Card 2 -->
+                    <div class="relative">
+                        <div class="card-gradient-3 rounded-2xl p-6 text-white shadow-xl transform hover:scale-105 transition-transform duration-300">
+                            <div class="flex justify-between items-start mb-8">
+                                <div>
+                                    <div class="text-sm opacity-75">OWODE VIRTUAL</div>
+                                    <div class="text-xs opacity-60">Subscriptions</div>
+                                </div>
+                                <div class="w-8 h-8 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <div class="text-lg font-mono tracking-wider">**** **** **** 2345</div>
+                            </div>
+                            
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <div class="text-xs opacity-60">LIMIT</div>
+                                    <div class="text-sm font-semibold">₦50,000</div>
+                                </div>
+                                <div>
+                                    <div class="text-xs opacity-60">EXPIRES</div>
+                                    <div class="text-sm font-semibold">03/25</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex space-x-2">
+                            <button onclick="manageCard('virtual2')" class="flex-1 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Manage
+                            </button>
+                            <button onclick="deleteCard('virtual2')" class="flex-1 bg-red-100 hover:bg-red-200 text-red-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 slide-in">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Recent Card Transactions</h3>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M8 11v6h8v-6H8z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Amazon Purchase</div>
+                                <div class="text-sm text-gray-600">Virtual Card •••• 8901</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-gray-900">-₦15,450</div>
+                            <div class="text-sm text-gray-600">Today, 2:30 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Shoprite</div>
+                                <div class="text-sm text-gray-600">Physical Card •••• 4567</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-gray-900">-₦8,750</div>
+                            <div class="text-sm text-gray-600">Yesterday, 6:45 PM</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011-1h2a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V4a1 1 0 011-1h2a1 1 0 011 1v3"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">Netflix Subscription</div>
+                                <div class="text-sm text-gray-600">Virtual Card •••• 2345</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-gray-900">-₦2,900</div>
+                            <div class="text-sm text-gray-600">Dec 18, 12:00 AM</div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-gray-900">ATM Withdrawal</div>
+                                <div class="text-sm text-gray-600">Physical Card •••• 4567</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-semibold text-gray-900">-₦20,000</div>
+                            <div class="text-sm text-gray-600">Dec 17, 3:15 PM</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-6">
+                    <button onclick="window.location.href='transaction-history.html'" class="text-blue-600 hover:text-blue-700 font-semibold">
+                        View All Transactions →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Request Card Modal -->
+    <div id="requestCardModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-3xl p-8 max-w-md mx-4 shadow-2xl slide-in">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Request New Card</h3>
+            
+            <div class="space-y-4 mb-6">
+                <label class="card-type-option cursor-pointer">
+                    <input type="radio" name="cardType" value="physical" class="sr-only" checked>
+                    <div class="p-4 border-2 border-blue-500 bg-blue-50 rounded-xl hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Physical Debit Card</h4>
+                                <p class="text-sm text-gray-600">Delivered to your address</p>
+                                <p class="text-sm font-semibold text-blue-600">₦2,000 fee</p>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+
+                <label class="card-type-option cursor-pointer">
+                    <input type="radio" name="cardType" value="virtual" class="sr-only">
+                    <div class="p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:bg-green-50 hover:shadow-md transition-all duration-300">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center">
+                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Virtual Card</h4>
+                                <p class="text-sm text-gray-600">Instant online payments</p>
+                                <p class="text-sm font-semibold text-green-600">Free</p>
+                            </div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+            <div id="virtualCardOptions" class="space-y-4 mb-6 hidden">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Card Purpose</label>
+                    <select class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                        <option>Online Shopping</option>
+                        <option>Subscriptions</option>
+                        <option>Travel Bookings</option>
+                        <option>General Use</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Spending Limit (₦)</label>
+                    <select class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                        <option value="25000">₦25,000</option>
+                        <option value="50000">₦50,000</option>
+                        <option value="100000">₦100,000</option>
+                        <option value="200000">₦200,000</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button onclick="closeRequestCardModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors">
+                    Cancel
+                </button>
+                <button onclick="requestCard()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
+                    Request Card
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize page
+        window.addEventListener('load', function() {
+            checkAuthentication();
+            setupCardTypeSelection();
+        });
+
+        function checkAuthentication() {
+            const session = localStorage.getItem('owode_session');
+            const currentUser = localStorage.getItem('owode_current_user');
+            
+            if (!session || !currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        function setupCardTypeSelection() {
+            document.querySelectorAll('input[name="cardType"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Update card styles
+                    document.querySelectorAll('.card-type-option > div').forEach(card => {
+                        card.classList.remove('border-blue-500', 'border-green-500', 'bg-blue-50', 'bg-green-50');
+                        card.classList.add('border-gray-200');
+                    });
+                    
+                    const selectedCard = this.closest('.card-type-option').querySelector('div');
+                    if (this.value === 'physical') {
+                        selectedCard.classList.add('border-blue-500', 'bg-blue-50');
+                        document.getElementById('virtualCardOptions').classList.add('hidden');
+                    } else if (this.value === 'virtual') {
+                        selectedCard.classList.add('border-green-500', 'bg-green-50');
+                        document.getElementById('virtualCardOptions').classList.remove('hidden');
+                    }
+                });
+            });
+        }
+
+        function showRequestCardModal() {
+            document.getElementById('requestCardModal').classList.remove('hidden');
+        }
+
+        function closeRequestCardModal() {
+            document.getElementById('requestCardModal').classList.add('hidden');
+        }
+
+        function requestCard() {
+            const cardType = document.querySelector('input[name="cardType"]:checked').value;
+            
+            if (cardType === 'physical') {
+                alert('Physical card request submitted! Your card will be delivered within 5-7 business days. A fee of ₦2,000 will be charged to your account.');
+            } else {
+                alert('Virtual card created successfully! You can start using it immediately for online transactions.');
+            }
+            
+            closeRequestCardModal();
+        }
+
+        function manageCard(cardId) {
+            alert(`Card management options for ${cardId} would open here`);
+            // Here you would open a card management modal
+        }
+
+        function freezeCard(cardId) {
+            if (confirm('Are you sure you want to freeze this card? You can unfreeze it anytime.')) {
+                alert('Card has been frozen successfully!');
+            }
+        }
+
+        function deleteCard(cardId) {
+            if (confirm('Are you sure you want to delete this virtual card? This action cannot be undone.')) {
+                alert('Virtual card has been deleted successfully!');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('bg-black')) {
+                closeRequestCardModal();
+            }
+        });
+
+        const TARGET_WORD = "OWODE";
+
+        function wrapTextNodes(node) {
+            if (node.nodeType === 3) {
+                const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+                const parent = node.parentNode;
+                const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
+                if (replacedHTML !== node.nodeValue) {
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = replacedHTML;
+                    parent.replaceChild(wrapper, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+                [...node.childNodes].forEach(wrapTextNodes);
+            }
+        }
+
+        wrapTextNodes(document.body);
+    </script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - OWODE Digital Services LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .square-font {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+  }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass-effect border-b border-white border-opacity-20">
+        <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <div class="flex items-center space-x-4">
+                <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-16 w-auto">
+                <div>
+                    <h1 class="text-xl font-bold gradient-text">Transaction History</h1>
+                    <p class="text-sm text-gray-600">View all your transactions</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="window.location.href='dashboard.html'" class="text-gray-600 hover:text-gray-900 transition-colors">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </button>
+                <button onclick="logout()" class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg font-medium transition-colors">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- Summary Cards -->
+        <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full font-medium">This Month</span>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-600 mb-1">Total Credits</h3>
+                <div class="text-2xl font-bold text-gray-900">₦125,750</div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full font-medium">This Month</span>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-600 mb-1">Total Debits</h3>
+                <div class="text-2xl font-bold text-gray-900">₦45,200</div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 slide-in">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-medium">Total</span>
+                </div>
+                <h3 class="text-sm font-semibold text-gray-600 mb-1">Transactions</h3>
+                <div class="text-2xl font-bold text-gray-900">47</div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-8 slide-in">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div class="flex flex-col md:flex-row gap-4 flex-1">
+                    <div class="flex-1">
+                        <input type="text" placeholder="Search transactions..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                    </div>
+                    <select class="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                        <option>All Types</option>
+                        <option>Credit</option>
+                        <option>Debit</option>
+                        <option>Transfer</option>
+                        <option>Deposit</option>
+                        <option>Withdrawal</option>
+                    </select>
+                    <select class="px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                        <option>Last 30 days</option>
+                        <option>Last 7 days</option>
+                        <option>Last 3 months</option>
+                        <option>Last 6 months</option>
+                        <option>Last year</option>
+                    </select>
+                </div>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
+                    Export
+                </button>
+            </div>
+        </div>
+
+        <!-- Transaction List -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden slide-in">
+            <div class="p-6 border-b border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900">Recent Transactions</h3>
+            </div>
+            
+            <div class="divide-y divide-gray-200" id="transactionsList">
+                <!-- Transactions will be loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="p-6 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-600">
+                        Showing 1-10 of 47 transactions
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                            Previous
+                        </button>
+                        <button class="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">
+                            1
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                            2
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                            3
+                        </button>
+                        <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors">
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div id="transactionModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden backdrop-blur-sm">
+        <div class="bg-white rounded-3xl p-8 max-w-md mx-4 shadow-2xl slide-in">
+            <div class="text-center mb-6">
+                <div id="modalIcon" class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2" id="modalTitle">Transaction Details</h3>
+            </div>
+            
+            <div class="space-y-4" id="modalContent">
+                <!-- Transaction details will be loaded here -->
+            </div>
+            
+            <div class="flex space-x-4 pt-6">
+                <button onclick="closeTransactionModal()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-semibold transition-colors">
+                    Close
+                </button>
+                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
+                    Download Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize page
+        window.addEventListener('load', function() {
+            checkAuthentication();
+            loadTransactions();
+        });
+
+        function checkAuthentication() {
+            const session = localStorage.getItem('owode_session');
+            const currentUser = localStorage.getItem('owode_current_user');
+            
+            if (!session || !currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        function loadTransactions() {
+            const transactions = [
+                {
+                    id: 'TXN001',
+                    type: 'credit',
+                    description: 'Interest Payment',
+                    amount: 2500,
+                    date: '2024-01-15T10:30:00',
+                    status: 'completed',
+                    reference: 'INT2024011501',
+                    icon: '💰'
+                },
+                {
+                    id: 'TXN002',
+                    type: 'debit',
+                    description: 'Transfer to John Doe',
+                    amount: 5000,
+                    date: '2024-01-14T14:22:00',
+                    status: 'completed',
+                    reference: 'TRF2024011401',
+                    icon: '📤'
+                },
+                {
+                    id: 'TXN003',
+                    type: 'credit',
+                    description: 'Deposit via Bank Transfer',
+                    amount: 50000,
+                    date: '2024-01-13T09:15:00',
+                    status: 'completed',
+                    reference: 'DEP2024011301',
+                    icon: '💳'
+                },
+                {
+                    id: 'TXN004',
+                    type: 'debit',
+                    description: 'ATM Withdrawal',
+                    amount: 10000,
+                    date: '2024-01-12T16:45:00',
+                    status: 'completed',
+                    reference: 'WTH2024011201',
+                    icon: '🏧'
+                },
+                {
+                    id: 'TXN005',
+                    type: 'credit',
+                    description: 'Referral Bonus',
+                    amount: 1000,
+                    date: '2024-01-11T11:20:00',
+                    status: 'completed',
+                    reference: 'REF2024011101',
+                    icon: '🎁'
+                },
+                {
+                    id: 'TXN006',
+                    type: 'debit',
+                    description: 'Online Purchase',
+                    amount: 15000,
+                    date: '2024-01-10T19:30:00',
+                    status: 'completed',
+                    reference: 'PUR2024011001',
+                    icon: '🛒'
+                },
+                {
+                    id: 'TXN007',
+                    type: 'credit',
+                    description: 'Salary Payment',
+                    amount: 75000,
+                    date: '2024-01-09T08:00:00',
+                    status: 'completed',
+                    reference: 'SAL2024010901',
+                    icon: '💼'
+                },
+                {
+                    id: 'TXN008',
+                    type: 'debit',
+                    description: 'Utility Bill Payment',
+                    amount: 8500,
+                    date: '2024-01-08T13:15:00',
+                    status: 'completed',
+                    reference: 'UTL2024010801',
+                    icon: '⚡'
+                }
+            ];
+
+            const transactionsList = document.getElementById('transactionsList');
+            transactionsList.innerHTML = transactions.map(transaction => {
+                const date = new Date(transaction.date);
+                const formattedDate = date.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                const formattedTime = date.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="p-6 hover:bg-gray-50 transition-colors cursor-pointer" onclick="showTransactionDetail('${transaction.id}')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 ${transaction.type === 'credit' ? 'bg-green-100' : 'bg-red-100'} rounded-xl flex items-center justify-center">
+                                    <span class="text-lg">${transaction.icon}</span>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">${transaction.description}</div>
+                                    <div class="text-sm text-gray-500">${formattedDate} at ${formattedTime}</div>
+                                    <div class="text-xs text-gray-400">Ref: ${transaction.reference}</div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-bold text-lg ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'}">
+                                    ${transaction.type === 'credit' ? '+' : '-'}₦${transaction.amount.toLocaleString()}
+                                </div>
+                                <div class="text-xs ${transaction.status === 'completed' ? 'text-green-600' : 'text-yellow-600'} font-medium">
+                                    ${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showTransactionDetail(transactionId) {
+            // Sample transaction detail
+            const transaction = {
+                id: transactionId,
+                type: 'credit',
+                description: 'Interest Payment',
+                amount: 2500,
+                date: '2024-01-15T10:30:00',
+                status: 'completed',
+                reference: 'INT2024011501',
+                from: 'OWODE Interest',
+                to: 'Your Account'
+            };
+
+            const modal = document.getElementById('transactionModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Transaction ID:</span>
+                        <span class="font-semibold">${transaction.id}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Amount:</span>
+                        <span class="font-semibold ${transaction.type === 'credit' ? 'text-green-600' : 'text-red-600'}">
+                            ${transaction.type === 'credit' ? '+' : '-'}₦${transaction.amount.toLocaleString()}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Date:</span>
+                        <span class="font-semibold">${new Date(transaction.date).toLocaleString()}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Status:</span>
+                        <span class="font-semibold text-green-600">${transaction.status.charAt(0).toUpperCase() + transaction.status.slice(1)}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Reference:</span>
+                        <span class="font-semibold">${transaction.reference}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">From:</span>
+                        <span class="font-semibold">${transaction.from}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">To:</span>
+                        <span class="font-semibold">${transaction.to}</span>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function closeTransactionModal() {
+            document.getElementById('transactionModal').classList.add('hidden');
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('owode_session');
+                localStorage.removeItem('owode_current_user');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('backdrop-blur-sm')) {
+                closeTransactionModal();
+            }
+        });
+        const TARGET_WORD = "OWODE";
+
+function wrapTextNodes(node) {
+  if (node.nodeType === 3) {
+    const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+    const parent = node.parentNode;
+    const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
+    if (replacedHTML !== node.nodeValue) {
+      const wrapper = document.createElement('span');
+      wrapper.innerHTML = replacedHTML;
+      parent.replaceChild(wrapper, node);
+    }
+  } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+    [...node.childNodes].forEach(wrapTextNodes);
+  }
+}
+
+wrapTextNodes(document.body);
+const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ email, password })
+});
+
+
+    </script>
+        <script src="highlight-word.js"></script>
+
+</body>
+</html>

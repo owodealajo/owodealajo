@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Settings - OWODE Digital Services LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .square-font {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass-effect border-b border-white border-opacity-20">
+        <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <div class="flex items-center space-x-4">
+                <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-16 w-auto">
+                <div>
+                    <h1 class="text-xl font-bold gradient-text">Security Settings</h1>
+                    <p class="text-sm text-gray-600">Manage your account security</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="window.location.href='dashboard.html'" class="text-gray-600 hover:text-gray-900 transition-colors">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </button>
+                <button onclick="logout()" class="bg-red-50 hover:bg-red-100 text-red-600 px-4 py-2 rounded-lg font-medium transition-colors">
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Security Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 slide-in">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Security Overview</h3>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 bg-green-50 rounded-xl">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Account Secure</h4>
+                        <p class="text-sm text-gray-600">Your account is protected</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-yellow-50 rounded-xl">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">2FA Recommended</h4>
+                        <p class="text-sm text-gray-600">Enable for extra security</p>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-blue-50 rounded-xl">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-2">Login Monitoring</h4>
+                        <p class="text-sm text-gray-600">All logins tracked</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Settings -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 slide-in">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Password Settings</h3>
+                
+                <form id="passwordForm" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Current Password</label>
+                        <input type="password" id="currentPassword" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">New Password</label>
+                        <input type="password" id="newPassword" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-500 focus:ring-opacity-20 focus:border-blue-500 transition-all duration-300">
+                    </div>
+                    
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-colors">
+                        Update Password
+                    </button>
+                </form>
+            </div>
+
+            <!-- Two-Factor Authentication -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 slide-in">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Two-Factor Authentication</h3>
+                        <p class="text-gray-600">Add an extra layer of security to your account</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="twoFactorToggle" class="w-6 h-6 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" onchange="toggleTwoFactor()">
+                        <label for="twoFactorToggle" class="ml-3 text-sm font-medium text-gray-900">Enable 2FA</label>
+                    </div>
+                </div>
+                
+                <div id="twoFactorSetup" class="hidden space-y-4">
+                    <div class="p-4 bg-blue-50 rounded-xl">
+                        <h4 class="font-semibold text-blue-900 mb-2">Setup Instructions:</h4>
+                        <ol class="list-decimal list-inside text-sm text-blue-800 space-y-1">
+                            <li>Download an authenticator app (Google Authenticator, Authy, etc.)</li>
+                            <li>Scan the QR code below with your app</li>
+                            <li>Enter the 6-digit code from your app to verify</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-48 h-48 bg-gray-200 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                            <span class="text-gray-500">QR Code Placeholder</span>
+                        </div>
+                        <input type="text" placeholder="Enter 6-digit code" class="w-48 px-4 py-3 border-2 border-gray-200 rounded-xl text-center text-lg font-mono">
+                        <button onclick="verifyTwoFactor()" class="block w-48 mx-auto mt-4 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold transition-colors">
+                            Verify & Enable
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Sessions -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 slide-in">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Active Sessions</h3>
+                
+                <div class="space-y-4" id="sessionsList">
+                    <!-- Sessions will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Security Alerts -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 slide-in">
+                <h3 class="text-xl font-bold text-gray-900 mb-6">Security Alerts</h3>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div>
+                            <div class="font-semibold text-gray-900">Email Notifications</div>
+                            <div class="text-sm text-gray-600">Get notified of login attempts</div>
+                        </div>
+                        <input type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div>
+                            <div class="font-semibold text-gray-900">SMS Alerts</div>
+                            <div class="text-sm text-gray-600">Receive SMS for suspicious activity</div>
+                        </div>
+                        <input type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                        <div>
+                            <div class="font-semibold text-gray-900">Transaction Alerts</div>
+                            <div class="text-sm text-gray-600">Alert for all transactions above ₦10,000</div>
+                        </div>
+                        <input type="checkbox" checked class="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize page
+        window.addEventListener('load', function() {
+            checkAuthentication();
+            loadActiveSessions();
+        });
+
+        function checkAuthentication() {
+            const session = localStorage.getItem('owode_session');
+            const currentUser = localStorage.getItem('owode_current_user');
+            
+            if (!session || !currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        function loadActiveSessions() {
+            const sessions = [
+                {
+                    device: 'Current Session',
+                    browser: 'Chrome on Windows',
+                    location: 'Lagos, Nigeria',
+                    time: 'Active now',
+                    current: true
+                },
+                {
+                    device: 'Mobile Device',
+                    browser: 'Safari on iPhone',
+                    location: 'Lagos, Nigeria',
+                    time: '2 hours ago',
+                    current: false
+                }
+            ];
+
+            const sessionsList = document.getElementById('sessionsList');
+            sessionsList.innerHTML = sessions.map(session => `
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 ${session.current ? 'bg-green-100' : 'bg-gray-100'} rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 ${session.current ? 'text-green-600' : 'text-gray-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900">${session.device}</div>
+                            <div class="text-sm text-gray-600">${session.browser}</div>
+                            <div class="text-sm text-gray-500">${session.location} • ${session.time}</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        ${session.current ? 
+                            '<span class="text-green-600 text-sm font-medium">Current</span>' : 
+                            '<button onclick="terminateSession()" class="text-red-600 hover:text-red-700 text-sm font-medium">Terminate</button>'
+                        }
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('passwordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match!');
+                return;
+            }
+            
+            if (newPassword.length < 8) {
+                alert('Password must be at least 8 characters long!');
+                return;
+            }
+            
+            alert('Password updated successfully!');
+            this.reset();
+        });
+
+        function toggleTwoFactor() {
+            const toggle = document.getElementById('twoFactorToggle');
+            const setup = document.getElementById('twoFactorSetup');
+            
+            if (toggle.checked) {
+                setup.classList.remove('hidden');
+            } else {
+                setup.classList.add('hidden');
+            }
+        }
+
+        function verifyTwoFactor() {
+            alert('Two-factor authentication enabled successfully!');
+            document.getElementById('twoFactorSetup').classList.add('hidden');
+        }
+
+        function terminateSession() {
+            if (confirm('Are you sure you want to terminate this session?')) {
+                alert('Session terminated successfully!');
+                loadActiveSessions();
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('owode_session');
+                localStorage.removeItem('owode_current_user');
+                window.location.href = 'index.html';
+            }
+        }
+
+        const TARGET_WORD = "OWODE";
+
+        function wrapTextNodes(node) {
+            if (node.nodeType === 3) {
+                const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+                const parent = node.parentNode;
+                const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
+                if (replacedHTML !== node.nodeValue) {
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = replacedHTML;
+                    parent.replaceChild(wrapper, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+                [...node.childNodes].forEach(wrapTextNodes);
+            }
+        }
+
+        wrapTextNodes(document.body);
+    </script>
+    <script src="highlight-word.js"></script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loan Application — OWODE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    .step-circle { width: 2.25rem; height:2.25rem; line-height:2.25rem; border-radius:9999px; }
+    .gradient-btn { background: linear-gradient(90deg,#3b82f6 0%,#7c3aed 100%); }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-start justify-center py-12">
+
+  <main class="w-full max-w-4xl mx-4">
+    <div class="bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <!-- Left: Intro -->
+        <section class="p-8 md:col-span-1 bg-gradient-to-b from-blue-600 to-purple-700 text-white">
+          <div class="flex items-center mb-6">
+            <img src="images/owode-logo.jpeg" alt="OWODE" class="h-12 w-auto rounded-md mr-3" />
+            <div>
+              <h1 class="text-2xl font-['Rajdhani']">OWODE Loans</h1>
+              <p class="text-sm opacity-90">Fast, secure & transparent</p>
+            </div>
+          </div>
+
+          <p class="text-sm opacity-90 mb-6">Complete your details step‑by‑step. We only ask for what’s necessary to assess your loan eligibility.</p>
+
+          <ol id="leftSteps" class="space-y-4 text-sm">
+            <li class="flex items-center gap-3">
+              <div id="dot-1" class="step-circle flex items-center justify-center bg-white/20 text-white">1</div>
+              <div><strong>Identity</strong><div class="opacity-80">BVN / NIN</div></div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div id="dot-2" class="step-circle flex items-center justify-center bg-white/10 text-white">2</div>
+              <div><strong>Address & Work</strong><div class="opacity-80">Income details</div></div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div id="dot-3" class="step-circle flex items-center justify-center bg-white/10 text-white">3</div>
+              <div><strong>Next-of-Kin & Card</strong><div class="opacity-80">Emergency contact & payment token</div></div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div id="dot-4" class="step-circle flex items-center justify-center bg-white/10 text-white">4</div>
+              <div><strong>Loan</strong><div class="opacity-80">Amount, interest & term</div></div>
+            </li>
+            <li class="flex items-center gap-3">
+              <div id="dot-5" class="step-circle flex items-center justify-center bg-white/10 text-white">5</div>
+              <div><strong>Review</strong><div class="opacity-80">Confirm & submit</div></div>
+            </li>
+          </ol>
+
+          <div class="mt-6">
+            <button id="saveDraftBtn" class="w-full py-2 rounded-xl bg-white/20 hover:bg-white/30 border border-white/20 text-sm">Save draft</button>
+            <button id="clearDraftBtn" class="w-full mt-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs">Clear saved draft</button>
+          </div>
+        </section>
+
+        <!-- Right: Form -->
+        <section class="p-8 md:col-span-2">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-['Rajdhani'] text-gray-800">Loan Application</h2>
+            <div class="text-sm text-gray-500">Secure • KYC • BNPL</div>
+          </div>
+
+          <!-- Progress bar -->
+          <div class="w-full bg-gray-200 rounded-full h-2 mb-6">
+            <div id="progressBar" class="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-600" style="width:0%"></div>
+          </div>
+
+          <!-- Steps container -->
+          <form id="loanWizard" class="space-y-6" onsubmit="return false;">
+            <!-- Step 1: Identity -->
+            <fieldset data-step="1" class="step">
+              <legend class="text-lg font-semibold text-gray-700 mb-4">Step 1 — Identity</legend>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">BVN <span class="text-red-500">*</span></label>
+                  <input inputmode="numeric" pattern="\d*" maxlength="11" id="bvn" name="bvn" autocomplete="bvn" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="11-digit BVN">
+                  <p class="text-xs text-gray-400 mt-1">Your BVN is used for identity verification (11 digits).</p>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">NIN <span class="text-red-500">*</span></label>
+                  <input inputmode="numeric" pattern="\d*" maxlength="11" id="nin" name="nin" autocomplete="national-id" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="11-digit NIN">
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">First name <span class="text-red-500">*</span></label>
+                  <input id="firstNameStep" name="firstName" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="John" autocomplete="given-name">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Last name</label>
+                  <input id="lastNameStep" name="lastName" class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="Doe" autocomplete="family-name">
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <button type="button" id="verifyIdentityBtn" class="px-4 py-2 rounded-xl bg-white text-blue-700 hover:bg-white/90">Verify BVN/NIN</button>
+                <div id="verifyIdentityMsg" class="text-sm mt-2 text-red-600 hidden"></div>
+              </div>
+            </fieldset>
+
+            <!-- Step 2: Address & Employment -->
+            <fieldset data-step="2" class="hidden step">
+              <legend class="text-lg font-semibold text-gray-700 mb-4">Step 2 — Address & Employment</legend>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700">Residential address <span class="text-red-500">*</span></label>
+                <input id="address" name="address" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="House number, street, city" autocomplete="street-address">
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Employment status <span class="text-red-500">*</span></label>
+                  <select id="employmentStatus" name="employmentStatus" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3">
+                    <option value="">Select...</option>
+                    <option value="employed">Employed (Salaried)</option>
+                    <option value="self-employed">Self‑employed</option>
+                    <option value="student">Student</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="retired">Retired</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Monthly income (₦) <span class="text-red-500">*</span></label>
+                  <input type="number" min="0" id="monthlyIncome" name="monthlyIncome" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="e.g., 150000" autocomplete="salary">
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- Step 3: Next-of-Kin & Card -->
+            <fieldset data-step="3" class="hidden step">
+              <legend class="text-lg font-semibold text-gray-700 mb-4">Step 3 — Next-of-Kin & Card</legend>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Next-of-kin name <span class="text-red-500">*</span></label>
+                  <input id="nextOfKinName" name="nextOfKinName" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="Full name" autocomplete="name">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Next-of-kin phone <span class="text-red-500">*</span></label>
+                  <input id="nextOfKinPhone" name="nextOfKinPhone" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="+2348012345678" autocomplete="tel">
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <label class="block text-sm font-medium text-gray-700">Card token / payment reference <span class="text-gray-400">(optional)</span></label>
+                <input id="cardToken" name="cardToken" class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="token returned by payment gateway">
+                <p class="text-xs text-gray-400 mt-1">We recommend tokenizing cards on the client with your payment gateway for compliance. This field can be filled later.</p>
+              </div>
+            </fieldset>
+
+            <!-- Step 4: Loan Details -->
+            <fieldset data-step="4" class="hidden step">
+              <legend class="text-lg font-semibold text-gray-700 mb-4">Step 4 — Loan Details</legend>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Loan amount (₦) <span class="text-red-500">*</span></label>
+                  <input id="amount" name="amount" type="number" min="1000" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="e.g., 50000">
+                </div>
+
+                <div>
+                  <label class="block text-sm font-medium text-gray-700">Interest rate (%) <span class="text-gray-400">auto-calculated</span></label>
+                  <input id="interestRate" name="interestRate" type="text" disabled class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3" placeholder="auto" value="">
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <label class="block text-sm font-medium text-gray-700">Term <span class="text-red-500">*</span></label>
+                <select id="termInMonths" name="termInMonths" required class="mt-1 block w-full rounded-xl border-gray-200 shadow-sm p-3">
+                  <option value="">Choose term</option>
+                  <option value="0.25">1 week</option>
+                  <option value="1">1 month</option>
+                  <option value="3">3 months</option>
+                  <option value="6">6 months</option>
+                  <option value="12">1 year</option>
+                </select>
+                <p class="text-xs text-gray-400 mt-1">Select loan term — interest & due date will be calculated automatically.</p>
+              </div>
+            </fieldset>
+
+            <!-- Step 5: Review & Submit -->
+            <fieldset data-step="5" class="hidden step">
+              <legend class="text-lg font-semibold text-gray-700 mb-4">Step 5 — Review & Submit</legend>
+
+              <div id="reviewBox" class="rounded-xl border border-gray-100 p-4 bg-gray-50 space-y-3 text-sm"></div>
+
+              <div class="mt-4 text-xs text-gray-500">By submitting you agree to OWODE's terms. We may run identity & credit checks.</div>
+            </fieldset>
+
+            <!-- Controls -->
+            <div class="flex items-center justify-between mt-6">
+              <div>
+                <button type="button" id="prevBtn" class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-sm hidden">Back</button>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div id="errorMsg" class="text-sm text-red-600 hidden"></div>
+                <button type="button" id="nextBtn" class="px-6 py-2 rounded-xl gradient-btn text-white shadow hover:opacity-95">Next</button>
+                <button type="button" id="submitBtn" class="px-6 py-2 rounded-xl gradient-btn text-white shadow hidden">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const STEPS = 5;
+      let currentStep = 1;
+      const API_BASE = 'http://localhost:3000/api/loans';
+      const token = localStorage.getItem('owode_token') || null;
+      const savedKey = 'owode_loan_draft';
+      const user = JSON.parse(localStorage.getItem('owode_user') || 'null');
+
+      const form = document.getElementById('loanWizard');
+      const progressBar = document.getElementById('progressBar');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMsg');
+      const reviewBox = document.getElementById('reviewBox');
+      const saveDraftBtn = document.getElementById('saveDraftBtn');
+      const clearDraftBtn = document.getElementById('clearDraftBtn');
+      const verifyIdentityBtn = document.getElementById('verifyIdentityBtn');
+      const verifyIdentityMsg = document.getElementById('verifyIdentityMsg');
+      const interestRateInput = document.getElementById('interestRate');
+      const termSelect = document.getElementById('termInMonths');
+
+      // Draft functions
+      function loadDraft() {
+        try {
+          const d = localStorage.getItem(savedKey);
+          if (!d) return;
+          const obj = JSON.parse(d);
+          Object.entries(obj).forEach(([k, v]) => {
+            const el = form.querySelector('[name="'+k+'"]');
+            if (el) el.value = v;
+          });
+        } catch (e) { console.warn('failed loading draft', e) }
+      }
+      function saveDraft() {
+        const data = Object.fromEntries(new FormData(form).entries());
+        localStorage.setItem(savedKey, JSON.stringify(data));
+        alert('Draft saved locally.');
+      }
+      function clearDraft() {
+        localStorage.removeItem(savedKey);
+        alert('Draft cleared.');
+      }
+      saveDraftBtn.addEventListener('click', saveDraft);
+      clearDraftBtn.addEventListener('click', () => {
+        if (confirm('Clear saved draft?')) clearDraft();
+      });
+
+      // show step
+      function showStep(n) {
+        currentStep = n;
+        document.querySelectorAll('.step').forEach(fs => fs.classList.add('hidden'));
+        const active = document.querySelector('[data-step="'+n+'"]');
+        if (active) active.classList.remove('hidden');
+
+        for (let i=1;i<=STEPS;i++) {
+          const dot = document.getElementById('dot-'+i);
+          if (!dot) continue;
+          if (i < n) { dot.className = 'step-circle flex items-center justify-center bg-white text-blue-700'; }
+          else if (i === n) { dot.className = 'step-circle flex items-center justify-center bg-white text-purple-700'; }
+          else { dot.className = 'step-circle flex items-center justify-center bg-white/10 text-white'; }
+        }
+
+        prevBtn.classList.toggle('hidden', n === 1);
+        nextBtn.classList.toggle('hidden', n === STEPS);
+        submitBtn.classList.toggle('hidden', n !== STEPS);
+
+        const pct = Math.round(((n-1)/(STEPS-1))*100);
+        progressBar.style.width = pct + '%';
+        errorMsg.classList.add('hidden');
+      }
+
+      // validators
+      function validateStep(n) {
+        errorMsg.classList.add('hidden');
+        if (n === 1) {
+          const bvn = document.getElementById('bvn').value.trim();
+          const nin = document.getElementById('nin').value.trim();
+          const first = document.getElementById('firstNameStep').value.trim();
+          if (!bvn || bvn.length !== 11 || !/^\d+$/.test(bvn)) { errorMsg.textContent = 'BVN must be 11 digits.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!nin || nin.length !== 11 || !/^\d+$/.test(nin)) { errorMsg.textContent = 'NIN must be 11 digits.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!first) { errorMsg.textContent = 'Enter your first name.'; errorMsg.classList.remove('hidden'); return false; }
+        }
+        if (n === 2) {
+          const address = document.getElementById('address').value.trim();
+          const income = document.getElementById('monthlyIncome').value.trim();
+          const emp = document.getElementById('employmentStatus').value;
+          if (!address) { errorMsg.textContent = 'Please provide your address.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!emp) { errorMsg.textContent = 'Select employment status.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!income || isNaN(income) || Number(income) < 0) { errorMsg.textContent = 'Enter valid monthly income.'; errorMsg.classList.remove('hidden'); return false; }
+        }
+        if (n === 3) {
+          const nok = document.getElementById('nextOfKinName').value.trim();
+          const nokPhone = document.getElementById('nextOfKinPhone').value.trim();
+          if (!nok) { errorMsg.textContent = 'Enter next-of-kin name.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!nokPhone) { errorMsg.textContent = 'Enter next-of-kin phone.'; errorMsg.classList.remove('hidden'); return false; }
+        }
+        if (n === 4) {
+          const amt = document.getElementById('amount').value.trim();
+          const term = document.getElementById('termInMonths').value;
+          if (!amt || isNaN(amt) || Number(amt) < 1000) { errorMsg.textContent = 'Loan amount must be at least ₦1,000.'; errorMsg.classList.remove('hidden'); return false; }
+          if (!term) { errorMsg.textContent = 'Choose a term.'; errorMsg.classList.remove('hidden'); return false; }
+        }
+        return true;
+      }
+
+      // compute interest & review
+      function computeInterest(amount, termInMonths) {
+        const interestTable = { '0.25': 5, '1': 15, '3': 25, '6': 40, '12': 60 };
+        const interestRate = interestTable[String(termInMonths)] ?? 50;
+        const interestAmount = amount * (interestRate / 100);
+        const totalRepay = Number((amount + interestAmount).toFixed(2));
+        const monthlyInstallment = termInMonths >= 1 ? Number((totalRepay / Math.round(termInMonths)).toFixed(2)) : totalRepay;
+        return { interestRate, interestAmount, totalRepay, monthlyInstallment };
+      }
+
+      function buildReview() {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const amount = Number(data.amount || 0);
+        const termInMonths = Number(data.termInMonths || document.getElementById('termInMonths').value || 1);
+        const { interestRate, interestAmount, totalRepay, monthlyInstallment } = computeInterest(amount, termInMonths);
+
+        interestRateInput.value = interestRate + ' %';
+
+        const lines = [
+          `<div><strong>Name:</strong> ${data.firstName || ''} ${data.lastName || ''}</div>`,
+          `<div><strong>BVN:</strong> ${data.bvn || ''}</div>`,
+          `<div><strong>NIN:</strong> ${data.nin || ''}</div>`,
+          `<div><strong>Address:</strong> ${data.address || ''}</div>`,
+          `<div><strong>Employment:</strong> ${data.employmentStatus || ''}</div>`,
+          `<div><strong>Monthly income:</strong> ₦${Number(data.monthlyIncome || 0).toLocaleString()}</div>`,
+          `<div><strong>Next-of-kin:</strong> ${data.nextOfKinName || ''} — ${data.nextOfKinPhone || ''}</div>`,
+          `<div><strong>Loan amount:</strong> ₦${amount.toLocaleString()}</div>`,
+          `<div><strong>Interest rate:</strong> ${interestRate}%</div>`,
+          `<div><strong>Term:</strong> ${termInMonths === 0.25 ? '1 week' : termInMonths + ' month(s)'}</div>`,
+          `<div class="pt-2"><strong>Total repay:</strong> ₦${totalRepay.toLocaleString()}</div>`,
+          `<div><strong>Installment:</strong> ₦${Number(monthlyInstallment).toLocaleString(undefined, {maximumFractionDigits:2})}</div>`
+        ];
+
+        reviewBox.innerHTML = lines.map(l => `<div class="py-1">${l}</div>`).join('');
+      }
+
+      // navigation
+      nextBtn.addEventListener('click', () => {
+        if (!validateStep(currentStep)) return;
+        if (currentStep === 4) buildReview();
+        showStep(Math.min(currentStep + 1, STEPS));
+      });
+      prevBtn.addEventListener('click', () => showStep(Math.max(currentStep - 1, 1)));
+
+      // Verify identity button (calls /verify-identity)
+      verifyIdentityBtn.addEventListener('click', async () => {
+        verifyIdentityMsg.classList.add('hidden');
+        const payload = {
+          userId: user && user.id ? user.id : null,
+          bvn: document.getElementById('bvn').value.trim(),
+          nin: document.getElementById('nin').value.trim()
+        };
+        if (!payload.userId) {
+          verifyIdentityMsg.textContent = 'You must be logged in to verify identity.';
+          verifyIdentityMsg.classList.remove('hidden');
+          return;
+        }
+        try {
+          verifyIdentityBtn.disabled = true;
+          verifyIdentityBtn.textContent = 'Verifying...';
+          const headers = { 'Content-Type':'application/json' };
+          if (token) headers.Authorization = 'Bearer ' + token;
+          const res = await fetch(API_BASE + '/verify-identity', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || data.message || 'Verification failed');
+          alert('Identity verified. You can continue to next steps.');
+          // optionally mark UI: e.g. enable next step automatically:
+          showStep(2);
+        } catch (err) {
+          verifyIdentityMsg.textContent = err.message || 'Verification error';
+          verifyIdentityMsg.classList.remove('hidden');
+        } finally {
+          verifyIdentityBtn.disabled = false;
+          verifyIdentityBtn.textContent = 'Verify BVN/NIN';
+        }
+      });
+      async function verifyBVN() {
+  const bvn = document.getElementById("bvnInput").value;
+  const userId = localStorage.getItem("userId");
+
+  const res = await fetch(`${API_BASE_URL}/loans/verify-identity`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ userId, bvn }),
+  });
+
+  const data = await res.json();
+  if (res.ok) {
+    alert("BVN Verified Successfully!");
+  } else {
+    alert("Verification Failed: " + data.error);
+  }
+}
+
+      // final submit
+      submitBtn.addEventListener('click', async () => {
+        if (!validateStep(currentStep)) return;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+
+        const payload = Object.fromEntries(new FormData(form).entries());
+        payload.amount = Number(payload.amount);
+        payload.termInMonths = Number(payload.termInMonths);
+
+        // attach userId
+        if (user && user.id) payload.userId = user.id;
+        else {
+          alert('You must be logged in to apply for a loan.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          return;
+        }
+
+        try {
+          console.log('Loan payload:', payload);
+          const headers = { 'Content-Type': 'application/json' };
+          if (token) headers.Authorization = 'Bearer ' + token;
+
+          const res = await fetch(API_BASE + '/apply', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(payload)
+          });
+
+          const data = await res.json();
+          if (!res.ok) {
+            // show friendly message
+            const msg = data.error || data.message || JSON.stringify(data);
+            throw new Error(msg);
+          }
+
+          const loan = data.loan;
+          alert('Loan submitted. Total repay: ₦' + Number(loan.totalRepay).toLocaleString());
+
+          // TODO: integrate payment gateway for collection if needed (Flutterwave client code -> use FLUTTERWAVE_PUBLIC_KEY)
+          // redirect to dashboard
+          localStorage.removeItem(savedKey);
+          window.location.href = 'dashboard.html';
+        } catch (err) {
+          console.error('Loan submission error:', err);
+          alert('Submission failed: ' + (err.message || 'Unknown error'));
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+        }
+      });
+
+      // repay helper (call this from dashboard loan card)
+      window.repayLoan = async function(loanId, amount) {
+        try {
+          const headers = { 'Content-Type': 'application/json' };
+          if (token) headers.Authorization = 'Bearer ' + token;
+          const res = await fetch(API_BASE + '/repay', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ loanId, amount })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || data.message);
+          alert('Repayment recorded (mock).');
+          location.reload();
+        } catch (err) {
+          alert('Repayment failed: ' + (err.message || 'unknown'));
+        }
+      };
+
+      // init
+      loadDraft();
+      showStep(1);
+
+      if (!token || !user) {
+        console.warn('No logged-in user found in localStorage. Login required for final apply.');
+      }
+
+      // Enter key moves next
+      form.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          if (currentStep < STEPS) nextBtn.click();
+          else submitBtn.click();
+        }
+      });
+
+      // when term changes, update interest input immediately
+      termSelect.addEventListener('change', () => {
+        const amount = Number(document.getElementById('amount').value || 0);
+        const term = Number(termSelect.value || 1);
+        const { interestRate } = computeInterest(amount, term);
+        interestRateInput.value = interestRate + ' %';
+      });
+
+      document.getElementById('amount').addEventListener('input', () => {
+        const amount = Number(document.getElementById('amount').value || 0);
+        const term = Number(termSelect.value || 1);
+        const { interestRate } = computeInterest(amount, term);
+        interestRateInput.value = interestRate + ' %';
+      });
+
+    })();
+  </script>
+</body>
+</html>

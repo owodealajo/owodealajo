@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPay-Inspired Landing Page</title>
+  <style>
+    :root {
+      --green: #00b386;
+      --dark: #003d33;
+      --light: #f7f7f7;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      color: var(--dark);
+    }
+
+    header {
+      background: var(--green);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-buttons {
+      margin-top: 1.5rem;
+    }
+
+    .cta-buttons a {
+      background: white;
+      color: var(--green);
+      padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    section.services {
+      background: var(--light);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    section.services h2 {
+      margin-bottom: 1rem;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .service-item {
+      background: white;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    .service-item h3 {
+      color: var(--green);
+      margin-bottom: 0.5rem;
+    }
+
+    section.download {
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .download-buttons img {
+      width: 160px;
+      margin: 0.5rem;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.75rem;
+      }
+      .cta-buttons a {
+        display: block;
+        margin: 0.5rem auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Smarter Payments for Everyday Life</h1>
+    <p>Send money, pay bills, top up airtime, and access financial services with ease — all in one app.</p>
+    <div class="cta-buttons">
+      <a href="#">Download on Play Store</a>
+      <a href="#">Get it on App Store</a>
+    </div>
+  </header>
+
+  <section class="services">
+    <h2>What You Can Do with Our App</h2>
+    <div class="service-grid">
+      <div class="service-item">
+        <h3>💸 Send Money</h3>
+        <p>Transfer to any bank instantly with no hidden fees.</p>
+      </div>
+      <div class="service-item">
+        <h3>📱 Airtime & Data</h3>
+        <p>Recharge any line and enjoy instant cashback.</p>
+      </div>
+      <div class="service-item">
+        <h3>💡 Pay Bills</h3>
+        <p>Settle your electricity, TV and more — fast and secure.</p>
+      </div>
+      <div class="service-item">
+        <h3>💰 Get Loans</h3>
+        <p>Apply for fast, affordable microloans directly in-app.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="download">
+    <h2>Download the App</h2>
+    <div class="download-buttons">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store">
+      <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="App Store">
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 SmarterPay Inc. All rights reserved. | Privacy | Terms</p>
+  </footer>
+
+</body>
+</html>
