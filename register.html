@@ -289,7 +289,8 @@
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
         
-            const res = await fetch('http://localhost:3000/api/auth/register', {
+            const res = awaitfetch('https://owode-backend.onrender.com/api/register',
+            {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
