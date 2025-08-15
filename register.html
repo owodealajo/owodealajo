@@ -245,118 +245,119 @@
 
     <script>
         document.querySelectorAll('input[name="accountType"]').forEach(radio => {
-          radio.addEventListener('change', function () {
-            document.querySelectorAll('.account-type-card').forEach(card => {
-              card.classList.remove('border-blue-500', 'border-green-500', 'bg-blue-50', 'bg-green-50');
-              card.classList.add('border-gray-200');
-              card.querySelector('.radio-indicator').classList.remove('bg-blue-500', 'bg-green-500', 'border-blue-500', 'border-green-500');
-              card.querySelector('.radio-indicator').classList.add('border-gray-300');
+            radio.addEventListener('change', function () {
+                document.querySelectorAll('.account-type-card').forEach(card => {
+                    card.classList.remove('border-blue-500', 'border-green-500', 'bg-blue-50', 'bg-green-50');
+                    card.classList.add('border-gray-200');
+                    card.querySelector('.radio-indicator').classList.remove('bg-blue-500', 'bg-green-500', 'border-blue-500', 'border-green-500');
+                    card.querySelector('.radio-indicator').classList.add('border-gray-300');
+                });
+        
+                const selectedCard = this.closest('label').querySelector('.account-type-card');
+                const indicator = selectedCard.querySelector('.radio-indicator');
+        
+                if (this.value === 'savings') {
+                    selectedCard.classList.add('border-blue-500', 'bg-blue-50');
+                    indicator.classList.add('bg-blue-500', 'border-blue-500');
+                } else {
+                    selectedCard.classList.add('border-green-500', 'bg-green-50');
+                    indicator.classList.add('bg-green-500', 'border-green-500');
+                }
+                indicator.classList.remove('border-gray-300');
             });
-        
-            const selectedCard = this.closest('label').querySelector('.account-type-card');
-            const indicator = selectedCard.querySelector('.radio-indicator');
-        
-            if (this.value === 'savings') {
-              selectedCard.classList.add('border-blue-500', 'bg-blue-50');
-              indicator.classList.add('bg-blue-500', 'border-blue-500');
-            } else {
-              selectedCard.classList.add('border-green-500', 'bg-green-50');
-              indicator.classList.add('bg-green-500', 'border-green-500');
-            }
-            indicator.classList.remove('border-gray-300');
-          });
         });
         
-        // Init account type card style
+        // Initialize account type card style
         document.querySelector('input[name="accountType"]:checked').dispatchEvent(new Event('change'));
         
-        // Form submission (Step 1: Send OTP to email)
+        // Form submission
         document.getElementById('registrationForm').addEventListener('submit', async function (e) {
-          e.preventDefault();
+            e.preventDefault();
         
-          const submitBtn = document.getElementById('submitBtn');
-          const submitText = document.getElementById('submitText');
-          const submitLoader = document.getElementById('submitLoader');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitLoader = document.getElementById('submitLoader');
         
-          if (!validateForm()) return;
+            if (!validateForm()) return;
         
-          submitBtn.disabled = true;
-          submitText.classList.add('hidden');
-          submitLoader.classList.remove('hidden');
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            submitLoader.classList.remove('hidden');
         
-          try {
-            const fullName = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
+            try {
+                const fullName = document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
         
-            const res = awaitfetch('https://owode-backend.onrender.com/api/register',
-            {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                full_name: fullName,
-                email: email,
-                phone_number: phone
-              })
-            });
+                const res = await fetch('https://owode-backend.onrender.com/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        full_name: fullName,
+                        email: email,
+                        phone_number: phone
+                    })
+                });
         
-            const result = await res.json();
+                const result = await res.json();
         
-            if (!res.ok) {
-              throw new Error(result.message || 'Registration failed');
+                if (!res.ok) {
+                    throw new Error(result.message || 'Registration failed');
+                }
+        
+                // Store user ID for OTP verification
+                localStorage.setItem('pending_user_id', result.userId);
+                alert('OTP sent to your email. Please verify.');
+        
+                window.location.href = 'verify-otp.html';
+            } catch (error) {
+                alert(error.message);
+            } finally {
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                submitLoader.classList.add('hidden');
             }
-        
-            // Store user ID for OTP verification
-            localStorage.setItem('pending_user_id', result.userId);
-            alert('OTP sent to your email. Please verify.');
-        
-            window.location.href = 'verify-otp.html';
-          } catch (error) {
-            alert(error.message);
-          } finally {
-            submitBtn.disabled = false;
-            submitText.classList.remove('hidden');
-            submitLoader.classList.add('hidden');
-          }
         });
         
+        // Form validation
         function validateForm() {
-          const email = document.getElementById('email').value;
-          const agreeTerms = document.getElementById('agreeTerms').checked;
+            const email = document.getElementById('email').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
         
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            document.getElementById('emailError').textContent = 'Please enter a valid email address';
-            document.getElementById('emailError').classList.remove('hidden');
-            return false;
-          }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email address';
+                document.getElementById('emailError').classList.remove('hidden');
+                return false;
+            }
         
-          if (!agreeTerms) {
-            alert('Please agree to the Terms and Conditions');
-            return false;
-          }
+            if (!agreeTerms) {
+                alert('Please agree to the Terms and Conditions');
+                return false;
+            }
         
-          return true;
+            return true;
         }
         
         // Highlight OWODE text
         const TARGET_WORD = "OWODE";
         function wrapTextNodes(node) {
-          if (node.nodeType === 3) {
-            const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
-            const parent = node.parentNode;
-            const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
-            if (replacedHTML !== node.nodeValue) {
-              const wrapper = document.createElement('span');
-              wrapper.innerHTML = replacedHTML;
-              parent.replaceChild(wrapper, node);
+            if (node.nodeType === 3) {
+                const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+                const parent = node.parentNode;
+                const replacedHTML = node.nodeValue.replace(regex, match => `<span class="square-font">${match}</span>`);
+                if (replacedHTML !== node.nodeValue) {
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = replacedHTML;
+                    parent.replaceChild(wrapper, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+                [...node.childNodes].forEach(wrapTextNodes);
             }
-          } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
-            [...node.childNodes].forEach(wrapTextNodes);
-          }
         }
         wrapTextNodes(document.body);
         </script>
+        
         
         <script src="highlight-word.js"></script>
 
