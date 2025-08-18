@@ -52,10 +52,11 @@
     <!-- Header -->
     <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur">
         <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <!-- Logo -->
             <div class="flex items-center space-x-3">
                 <img src="images/owode-logo.jpeg" class="h-12 w-auto sm:h-16 sm:w-auto object-contain" />
             </div>
-
+      
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="index.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Home</a>
@@ -65,28 +66,29 @@
                 <a href="become-agent.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Become an Agent</a>
                 <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Contact</a>
             </nav>
-
-            <!-- Header Buttons -->
-            <div class="flex items-center space-x-4">
-                <div id="authButtons" class="flex items-center space-x-4">
-                    <div id="guestButtons" class="flex items-center space-x-4">
-                        <a href="login.html" class="text-gray-600 hover:text-blue-600 font-medium transition-colors">Sign In</a>
-                        <a href="register.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base">Get Started</a>
-                    </div>
-                    <div id="userButtons" class="hidden flex items-center space-x-4">
-                        <a href="dashboard.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm sm:text-base">Dashboard</a>
-                        <button onclick="logout()" class="text-gray-600 hover:text-red-600 font-medium transition-colors">Logout</button>
-                    </div>
-                </div>
-                <!-- Mobile menu button -->
-                <button id="mobileMenuBtn" class="md:hidden p-2 text-gray-600 hover:text-blue-600">
-                    <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+      
+            <!-- Profile Dropdown (desktop, only when logged in) -->
+            <div id="userProfile" class="hidden md:block relative">
+                <button id="profileBtn" class="flex items-center space-x-2 focus:outline-none">
+                    <span id="profileIcon" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white text-lg font-bold">👤</span>
                 </button>
+      
+                <!-- Dropdown Menu -->
+                <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
+                    <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
+                    <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
+                    <button onclick="logout()" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</button>
+                </div>
             </div>
+      
+            <!-- Mobile menu button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 text-gray-600 hover:text-blue-600">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
         </div>
-
+      
         <!-- Mobile Slide-In Menu -->
         <div id="mobileMenu">
             <button id="closeMenuBtn" class="mb-6 text-gray-600 hover:text-red-600 text-2xl">✕</button>
@@ -97,15 +99,30 @@
                 <a href="how-it-work.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">How It Works</a>
                 <a href="become-agent.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Become an Agent</a>
                 <a href="contact.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Contact</a>
-                <div class="pt-4 border-t space-y-4">
+      
+                <!-- Guest Buttons (only if not logged in) -->
+                <div id="mobileGuestButtons" class="pt-4 border-t space-y-4">
                     <a href="login.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Sign In</a>
                     <a href="register.html" class="block bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-colors text-center text-lg">Get Started</a>
+                </div>
+      
+                <!-- User Dropdown (only if logged in) -->
+                <div id="mobileUserDropdown" class="hidden pt-4 border-t">
+                    <div class="flex items-center space-x-3 px-2">
+                        <span id="mobileProfileIcon" class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white text-lg font-bold">👤</span>
+                        <span id="mobileProfileName" class="text-gray-800 font-semibold"></span>
+                    </div>
+                    <div class="mt-3 space-y-2">
+                        <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Dashboard</a>
+                        <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Settings</a>
+                        <button onclick="logout()" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100 rounded">Logout</button>
+                    </div>
                 </div>
             </nav>
         </div>
         <div id="overlay"></div>
-    </header>
-
+      </header>
+      
     <!-- Hero Section -->
     <section class="min-h-screen bg-white pt-8">
         <div class="container mx-auto px-4 min-h-[calc(100vh-6rem)] flex items-center">
@@ -674,7 +691,42 @@
         });
       </script>
       
-    <script src="highlight-word.js"></script>
+<script>
+    // Toggle profile dropdown (desktop)
+    const profileBtn = document.getElementById('profileBtn');
+    const profileMenu = document.getElementById('profileMenu');
+    const profileIcon = document.getElementById('profileIcon');
+  
+    if (profileBtn) {
+      profileBtn.addEventListener('click', () => {
+        profileMenu.classList.toggle('hidden');
+      });
+      window.addEventListener('click', function(e) {
+        if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+          profileMenu.classList.add('hidden');
+        }
+      });
+    }
+  
+    // Auth logic
+    const currentUser = localStorage.getItem('owode_current_user');
+    if (currentUser) {
+      // Show desktop profile
+      document.getElementById('userProfile').classList.remove('hidden');
+      const firstLetter = currentUser.charAt(0).toUpperCase();
+      profileIcon.textContent = firstLetter;
+  
+      // Show mobile profile dropdown
+      document.getElementById('mobileGuestButtons').classList.add('hidden');
+      document.getElementById('mobileUserDropdown').classList.remove('hidden');
+      document.getElementById('mobileProfileIcon').textContent = firstLetter;
+      document.getElementById('mobileProfileName').textContent = currentUser;
+    } else {
+      // Show guest buttons
+      document.getElementById('mobileGuestButtons').classList.remove('hidden');
+      document.getElementById('mobileUserDropdown').classList.add('hidden');
+    }
+  </script>
     
 </body>
 </html>
