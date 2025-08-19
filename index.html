@@ -77,7 +77,6 @@
                 <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg py-2 z-50">
                     <a href="dashboard.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Dashboard</a>
                     <a href="settings.html" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Settings</a>
-                    <button onclick="logout()" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</button>
                 </div>
             </div>
       
@@ -608,9 +607,10 @@
             </div>
         </div>
     </footer>
-
     <script>
-        // Check authentication status on page load
+        // =============================
+        // Auth + UI Update Functions
+        // =============================
         window.addEventListener('load', checkAuthStatus);
       
         function checkAuthStatus() {
@@ -618,13 +618,24 @@
           const currentUser = localStorage.getItem('owode_current_user');
       
           if (session && currentUser) {
-            // User is logged in
-            document.getElementById('guestButtons').classList.add('hidden');
-            document.getElementById('userButtons').classList.remove('hidden');
+            // Desktop profile visible
+            document.getElementById('userProfile')?.classList.remove('hidden');
+      
+            // Set profile initials
+            const firstLetter = currentUser.charAt(0).toUpperCase();
+            const profileIcon = document.getElementById('profileIcon');
+            if (profileIcon) profileIcon.textContent = firstLetter;
+      
+            // Mobile dropdown visible
+            document.getElementById('mobileGuestButtons')?.classList.add('hidden');
+            document.getElementById('mobileUserDropdown')?.classList.remove('hidden');
+            document.getElementById('mobileProfileIcon').textContent = firstLetter;
+            document.getElementById('mobileProfileName').textContent = currentUser;
           } else {
-            // User is not logged in
-            document.getElementById('guestButtons').classList.remove('hidden');
-            document.getElementById('userButtons').classList.add('hidden');
+            // Guest mode
+            document.getElementById('userProfile')?.classList.add('hidden');
+            document.getElementById('mobileGuestButtons')?.classList.remove('hidden');
+            document.getElementById('mobileUserDropdown')?.classList.add('hidden');
           }
         }
       
@@ -632,37 +643,59 @@
           if (confirm('Are you sure you want to logout?')) {
             localStorage.removeItem('owode_session');
             localStorage.removeItem('owode_current_user');
-            checkAuthStatus();
-            alert('You have been logged out successfully!');
+            // Redirect to homepage after logout
+            window.location.href = "index.html";
           }
         }
       
-        // Mobile menu toggle with overlay
+        // =============================
+        // Mobile Menu Logic
+        // =============================
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const overlay = document.getElementById('overlay');
         const closeMenuBtn = document.getElementById('closeMenuBtn');
       
-        mobileMenuBtn.addEventListener('click', () => {
-          mobileMenu.classList.add('active');
-          overlay.classList.add('active');
-        });
-      
+        if (mobileMenuBtn) {
+          mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+          });
+        }
         if (closeMenuBtn) {
           closeMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             overlay.classList.remove('active');
           });
         }
+        if (overlay) {
+          overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+          });
+        }
       
-        overlay.addEventListener('click', () => {
-          mobileMenu.classList.remove('active');
-          overlay.classList.remove('active');
-        });
+        // =============================
+        // Profile Dropdown (Desktop)
+        // =============================
+        const profileBtn = document.getElementById('profileBtn');
+        const profileMenu = document.getElementById('profileMenu');
       
-        // Highlight "OWODE" text globally
+        if (profileBtn) {
+          profileBtn.addEventListener('click', () => {
+            profileMenu.classList.toggle('hidden');
+          });
+          window.addEventListener('click', function(e) {
+            if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
+              profileMenu.classList.add('hidden');
+            }
+          });
+        }
+      
+        // =============================
+        // Highlight OWODE everywhere
+        // =============================
         const TARGET_WORD = "OWODE";
-      
         function wrapTextNodes(node) {
           if (node.nodeType === 3) { // text node
             const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
@@ -677,10 +710,11 @@
             [...node.childNodes].forEach(wrapTextNodes);
           }
         }
-      
         wrapTextNodes(document.body);
       
-        // Add scroll effect to header
+        // =============================
+        // Scroll effect on header
+        // =============================
         window.addEventListener('scroll', () => {
           const header = document.querySelector('header');
           if (window.scrollY > 100) {
@@ -691,42 +725,7 @@
         });
       </script>
       
-<script>
-    // Toggle profile dropdown (desktop)
-    const profileBtn = document.getElementById('profileBtn');
-    const profileMenu = document.getElementById('profileMenu');
-    const profileIcon = document.getElementById('profileIcon');
-  
-    if (profileBtn) {
-      profileBtn.addEventListener('click', () => {
-        profileMenu.classList.toggle('hidden');
-      });
-      window.addEventListener('click', function(e) {
-        if (!profileBtn.contains(e.target) && !profileMenu.contains(e.target)) {
-          profileMenu.classList.add('hidden');
-        }
-      });
-    }
-  
-    // Auth logic
-    const currentUser = localStorage.getItem('owode_current_user');
-    if (currentUser) {
-      // Show desktop profile
-      document.getElementById('userProfile').classList.remove('hidden');
-      const firstLetter = currentUser.charAt(0).toUpperCase();
-      profileIcon.textContent = firstLetter;
-  
-      // Show mobile profile dropdown
-      document.getElementById('mobileGuestButtons').classList.add('hidden');
-      document.getElementById('mobileUserDropdown').classList.remove('hidden');
-      document.getElementById('mobileProfileIcon').textContent = firstLetter;
-      document.getElementById('mobileProfileName').textContent = currentUser;
-    } else {
-      // Show guest buttons
-      document.getElementById('mobileGuestButtons').classList.remove('hidden');
-      document.getElementById('mobileUserDropdown').classList.add('hidden');
-    }
-  </script>
+    <script src="highlight-word.js"></script>
     
 </body>
 </html>
