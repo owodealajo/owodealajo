@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More - OWODE Digital Services LTD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./images/owode logo.jpeg">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .owode-font {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .slide-in {
+            animation: slideIn 1s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur">
+        <div class="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+            <!-- Logo -->
+            <div class="flex items-center space-x-3">
+                <img src="images/owode-logo.jpeg" class="h-12 w-auto sm:h-16 sm:w-auto object-contain" />
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Home</a>
+                <a href="savings.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Savings</a>
+                <a href="loans.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Loans</a>
+                <a href="how-it-work.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">How It Works</a>
+                <a href="learn-more.html" class="text-blue-600 font-semibold border-b-2 border-blue-600 pb-1">Learn More</a>
+                <a href="become-agent.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Become an Agent</a>
+                <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition-colors font-medium">Contact</a>
+            </nav>
+
+            <!-- Mobile menu button -->
+            <button id="mobileMenuBtn" class="md:hidden p-2 text-gray-600 hover:text-blue-600">
+                <svg class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Slide-In Menu -->
+        <div id="mobileMenu" class="fixed top-0 right-[-100%] w-80 h-full bg-white shadow-2xl transition-all duration-300 z-50 p-6">
+            <button id="closeMenuBtn" class="mb-6 text-gray-600 hover:text-red-600 text-2xl">✕</button>
+            <nav class="flex flex-col space-y-6">
+                <a href="index.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Home</a>
+                <a href="savings.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Savings</a>
+                <a href="loans.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Loans</a>
+                <a href="how-it-work.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">How It Works</a>
+                <a href="learn-more.html" class="block text-blue-600 font-semibold text-lg">Learn More</a>
+                <a href="become-agent.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Become an Agent</a>
+                <a href="contact.html" class="block text-gray-600 hover:text-blue-600 transition-colors text-lg">Contact</a>
+            </nav>
+        </div>
+        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg text-white py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center space-y-8 slide-in">
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+                        Discover <span class="owode-font text-yellow-300">OWODE</span>
+                    </h1>
+                    <div class="w-24 h-1 bg-yellow-300 mx-auto"></div>
+                    <p class="text-xl md:text-2xl leading-relaxed text-blue-100">
+                        OWODE Alajo Agbaye is more than a contribution scheme — it is a trusted financial culture refined for today's world. For over 954 years, Ajo/Esusu has helped families, artisans, traders, and communities build stability, achieve goals, and secure their future. OWODE continues this heritage with transparency, safety, and digital convenience.
+                    </p>
+                </div>
+
+                <!-- Floating Elements -->
+                <div class="flex justify-center space-x-8 mt-12">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-6 py-3 floating-animation">
+                        <span class="text-2xl">🌟</span>
+                        <span class="ml-2 font-semibold">954 Years of Trust</span>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-6 py-3 floating-animation" style="animation-delay: 2s;">
+                        <span class="text-2xl">🔒</span>
+                        <span class="ml-2 font-semibold">100% Secure</span>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-full px-6 py-3 floating-animation" style="animation-delay: 4s;">
+                        <span class="text-2xl">📱</span>
+                        <span class="ml-2 font-semibold">Digital Convenience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who We Serve Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center space-y-4 mb-16 slide-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Built for Everyone</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Whether you are a market woman, shop owner, artisan, rider, union member, or young professional, OWODE gives you Ifọkànbalẹ — peace of mind — knowing your money is safe and your future is secured.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Market Woman -->
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in">
+                    <div class="w-16 h-16 bg-pink-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">👩‍💼</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Market Women</h3>
+                    <p class="text-gray-600">Daily traders and vendors who need flexible savings for business growth and family needs.</p>
+                </div>
+
+                <!-- Shop Owner -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in" style="animation-delay: 0.1s;">
+                    <div class="w-16 h-16 bg-blue-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🏪</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Shop Owners</h3>
+                    <p class="text-gray-600">Retailers and small business owners building capital for expansion and inventory.</p>
+                </div>
+
+                <!-- Artisan -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🔨</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Artisans</h3>
+                    <p class="text-gray-600">Craftsmen and skilled workers saving for tools, materials, and business development.</p>
+                </div>
+
+                <!-- Rider -->
+                <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in" style="animation-delay: 0.3s;">
+                    <div class="w-16 h-16 bg-yellow-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">🏍️</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Riders</h3>
+                    <p class="text-gray-600">Motorcycle and commercial drivers saving for vehicle maintenance and emergencies.</p>
+                </div>
+
+                <!-- Union Member -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">👥</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Union Members</h3>
+                    <p class="text-gray-600">Workers in cooperatives and unions building collective financial strength.</p>
+                </div>
+
+                <!-- Young Professional -->
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-8 text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 slide-in" style="animation-delay: 0.5s;">
+                    <div class="w-16 h-16 bg-indigo-200 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-3xl">💼</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Young Professionals</h3>
+                    <p class="text-gray-600">Modern workers and entrepreneurs leveraging traditional wisdom for contemporary goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center space-y-8 slide-in">
+                <div class="space-y-6">
+                    <h2 class="text-3xl md:text-4xl font-bold">954 Years of Financial Heritage</h2>
+                    <p class="text-xl leading-relaxed text-blue-100">
+                        Rooted in the ancient wisdom of Ajo/Esusu, OWODE brings this time-tested system into the digital age. We've maintained the core principles of trust, community, and mutual support while adding modern security, transparency, and convenience.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mt-12">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
+                        <div class="text-4xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold mb-2">Trust & Security</h3>
+                        <p class="text-blue-100">Your money is protected with bank-level security and transparent processes.</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
+                        <div class="text-4xl mb-4">🤝</div>
+                        <h3 class="text-xl font-bold mb-2">Community Support</h3>
+                        <p class="text-blue-100">Built on the strength of community and mutual accountability.</p>
+                    </div>
+                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-lg p-6">
+                        <div class="text-4xl mb-4">🚀</div>
+                        <h3 class="text-xl font-bold mb-2">Modern Innovation</h3>
+                        <p class="text-blue-100">Traditional wisdom meets cutting-edge technology for the best of both worlds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <div class="max-w-3xl mx-auto space-y-8 slide-in">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Ready to Experience OWODE?</h2>
+                <p class="text-xl text-gray-600">
+                    Click below to discover how OWODE works, the benefits for you and your business, and why thousands trust us to help them save, grow, and prosper.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="how-it-work.html" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-lg px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        Discover How OWODE Works
+                    </a>
+                    <a href="download-app.html" class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white text-lg px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:-translate-y-1">
+                        Start Your Journey
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-4 py-16">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <img src="images/owode-logo.jpeg" alt="OWODE Logo" class="h-12 w-auto">
+                    <p class="text-gray-400">Your trusted partner for savings, loans, and financial growth in Nigeria.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="savings.html" class="text-gray-400 hover:text-white transition-colors">Savings</a></li>
+                        <li><a href="loans.html" class="text-gray-400 hover:text-white transition-colors">Loans</a></li>
+                        <li><a href="how-it-work.html" class="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="learn-more.html" class="text-gray-400 hover:text-white transition-colors">Learn More</a></li>
+                        <li><a href="become-agent.html" class="text-gray-400 hover:text-white transition-colors">Become an Agent</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="refund.html" class="text-gray-400 hover:text-white transition-colors">Refund Policy</a></li>
+                        <li><a href="security.html" class="text-gray-400 hover:text-white transition-colors">Security</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold">Contact Info</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-gray-400">info@owodealajo.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span class="text-gray-400">+234 800 123 4567</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <svg class="h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-400">Lagos, Nigeria</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="text-center text-gray-400">
+                    <p>&copy; 2024 OWODE Digital Services LTD. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('right-[-100%]');
+                mobileMenu.classList.add('right-0');
+                overlay.classList.remove('hidden');
+            });
+        }
+        if (closeMenuBtn) {
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('right-0');
+                mobileMenu.classList.add('right-[-100%]');
+                overlay.classList.add('hidden');
+            });
+        }
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                mobileMenu.classList.remove('right-0');
+                mobileMenu.classList.add('right-[-100%]');
+                overlay.classList.add('hidden');
+            });
+        }
+
+        // Highlight OWODE everywhere
+        const TARGET_WORD = "OWODE";
+        function wrapTextNodes(node) {
+            if (node.nodeType === 3) {
+                const regex = new RegExp(`\\b${TARGET_WORD}\\b`, "g");
+                const parent = node.parentNode;
+                const replacedHTML = node.nodeValue.replace(regex, match => `<span class="owode-font">${match}</span>`);
+                if (replacedHTML !== node.nodeValue) {
+                    const wrapper = document.createElement('span');
+                    wrapper.innerHTML = replacedHTML;
+                    parent.replaceChild(wrapper, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !['SCRIPT', 'STYLE'].includes(node.tagName)) {
+                [...node.childNodes].forEach(wrapTextNodes);
+            }
+        }
+        wrapTextNodes(document.body);
+    </script>
+</body>
+</html>

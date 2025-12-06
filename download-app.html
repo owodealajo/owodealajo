@@ -18,6 +18,85 @@
       letter-spacing: 0.02em;
       text-transform: uppercase;
     }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      color: white;
+      transform: scale(0.7) translateY(-50px);
+      transition: all 0.5s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    .bell-icon {
+      font-size: 4rem;
+      animation: bellRing 2s ease-in-out infinite;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes bellRing {
+      0%, 100% { transform: rotate(0deg); }
+      10%, 30%, 50%, 70%, 90% { transform: rotate(-10deg); }
+      20%, 40%, 60%, 80% { transform: rotate(10deg); }
+    }
+
+    .countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .close-btn:hover {
+      transform: scale(1.2);
+    }
   </style>
 </head>
 <body class="bg-white">
@@ -51,7 +130,7 @@
         </div>
 
         <!-- Download Button -->
-        <a href="https://play.google.com/store/apps/details?id=com.owode.app" target="_blank" class="inline-flex items-center bg-black text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-300 shadow-lg text-lg">
+        <button id="downloadBtn" class="inline-flex items-center bg-black text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 transition-colors duration-300 shadow-lg text-lg">
           <svg class="w-6 h-6 mr-3" viewBox="0 0 24 24" fill="currentColor">
             <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.61 3 21.09 3 20.5Z"/>
             <path d="M16.81 15.12L6.05 21.34L14.54 12.85L16.81 15.12Z"/>
@@ -59,7 +138,7 @@
             <path d="M6.05 2.66L16.81 8.88L14.54 11.15L6.05 2.66Z"/>
           </svg>
           Download for Android
-        </a>
+        </button>
         <p class="text-sm text-gray-500 mt-4">Requires Android 5.0 or later</p>
       </div>
     </div>
@@ -72,7 +151,90 @@
     </div>
   </footer>
 
+  <!-- Coming Soon Modal -->
+  <div id="comingSoonModal" class="modal-overlay">
+    <div class="modal-content">
+      <button class="close-btn" id="closeModal">&times;</button>
+      <div class="bell-icon">🔔</div>
+      <h2 class="text-2xl font-bold mb-4">App Launch Coming Soon!</h2>
+      <p class="text-lg mb-4">
+        The OWODE mobile app will be available for download on December 26th, 2025 — just 20 days after our official launch on December 6th!
+      </p>
+      <div class="countdown" id="countdown">20 Days to Go!</div>
+      <p class="text-sm opacity-90">
+        Get ready to take control of your financial future with seamless savings, loans, and more. Stay tuned for updates!
+      </p>
+    </div>
+  </div>
+
   <script>
+    // Modal functionality
+    const downloadBtn = document.getElementById('downloadBtn');
+    const modal = document.getElementById('comingSoonModal');
+    const closeBtn = document.getElementById('closeModal');
+    const countdownEl = document.getElementById('countdown');
+
+    // Launch date: December 26, 2024
+    const launchDate = new Date('2024-12-26T00:00:00').getTime();
+
+    // Bell sound (using Web Audio API for a simple bell tone)
+    function playBellSound() {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+      oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+      oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
+
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+      oscillator.start(audioContext.currentTime);
+      oscillator.stop(audioContext.currentTime + 0.5);
+    }
+
+    // Update countdown
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        countdownEl.textContent = `${days} Days to Go!`;
+      } else {
+        countdownEl.textContent = "Launching Soon!";
+      }
+    }
+
+    // Show modal
+    function showModal() {
+      modal.classList.add('active');
+      playBellSound();
+      updateCountdown();
+    }
+
+    // Hide modal
+    function hideModal() {
+      modal.classList.remove('active');
+    }
+
+    // Event listeners
+    downloadBtn.addEventListener('click', showModal);
+    closeBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        hideModal();
+      }
+    });
+
+    // Update countdown every minute
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+
     // Highlight OWODE everywhere
     const TARGET_WORD = "OWODE";
     function wrapTextNodes(node) {
